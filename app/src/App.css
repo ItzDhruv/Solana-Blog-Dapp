@@ -105,12 +105,12 @@ a {
   transition: 1s;
 }
 
-.post__card_-2 {
+.post_card-2 {
   overflow: hidden;
   border-radius: 4px;
 }
 
-.post__card__image-2 {
+.post_card_image-2 {
   height: 14rem;
   width: 100%;
   background-size: cover;

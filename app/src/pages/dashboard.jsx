@@ -11,27 +11,10 @@ import { useHistory } from 'react-router-dom'
 export const Dashboard = () => {
   const history = useHistory()
   const [connecting, setConnecting] = useState(false)
-  const { select } = useWallet()
+  const { connected, select } = useWallet()
+  const { user, posts, initialized, initUser, createPost, showModal, setShowModal, } = useBlog()
   const [postTitle, setPostTitle] = useState("")
   const [postContent, setPostContent] = useState("")
-
-  // Static Data
-  const user = {
-    name: "Random Robot",
-    avatar: "https://avatarfiles.alphacoders.com/283/thumb-283778.jpg",
-  }
-  const connected = true
-  const posts = []
-
-  const createPost = () => {
-
-  }
-
-  const showModal = false
-  const setShowModal = () => {
-
-  }
-  /////////////////
 
   const onConnect = () => {
     setConnecting(true)
@@ -51,7 +34,7 @@ export const Dashboard = () => {
           <h2 className="text-2xl font-bold">
             <div className="bg-clip-text bg-gradient-to-br from-indigo-300 colorpink"
             >
-              Onaki
+              DD
             </div>
           </h2>
           {connected ? (
@@ -70,14 +53,26 @@ export const Dashboard = () => {
               <p className=" font-bold text-sm ml-2 capitalize">
                 {user?.name}
               </p>
-              <Button
-                className="ml-3 mr-2"
-                onClick={() => {
-                  setShowModal(true)
-                }}
-              >
-                Create Post
-              </Button>
+              {initialized ? (
+                <Button
+                  className="ml-3 mr-2"
+                  onClick={() => {
+                    setShowModal(true)
+                  }}
+                >
+                  Create Post
+                </Button>
+              ) : (
+                <Button
+                  className="ml-3 mr-2"
+                  onClick={() => {
+                    initUser()
+                  }}
+                >
+                  Initialize User
+                </Button>
+              )}
+
             </div>
           ) : (
             <Button
@@ -138,9 +133,9 @@ export const Dashboard = () => {
                     }}
                     key={item.account.id}
                   >
-                    <div className="post__card_-2">
+                    <div className="post_card-2">
                       <div
-                        className="post__card__image-2"
+                        className="post_card_image-2"
                         style={{
                           backgroundImage: `url("https://user-images.githubusercontent.com/62637513/184338539-9cdbdc58-1e72-4c48-8203-0b7ec23d3eb0.png")`,
                         }}
